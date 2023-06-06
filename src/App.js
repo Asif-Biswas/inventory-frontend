@@ -6,6 +6,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './components/home/Home';
 import AllCategories from './components/category/AllCategories';
 import AddCategory from './components/category/AddCategory';
+import AllProducts from './components/products/AllProducts';
+import AddProduct from './components/products/AddProduct';
+import EditProduct from './components/products/EditProduct';
 
 function App() {
   return (
@@ -26,6 +29,11 @@ function App() {
               {/* Category */}
               <Route path="/all-categories" element={<AllCategories/>} />
               <Route path="/add-category" element={<AddCategory/>} />
+
+              {/* Products */}
+              <Route path="/all-products" element={<AllProducts/>} />
+              <Route path="/add-product" element={<AddProduct/>} />
+              <Route path="/edit-product/:id" element={<EditProduct/>} />
 
           </Routes>
             {/* Main container end */}
