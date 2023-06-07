@@ -120,6 +120,27 @@ export default function Sidebar() {
                                 </ul>
                             </div>
                         </li>
+                        <li className="sidebar-dropdown">
+                            <a href="#">
+                                <i className="icon-layers2" />
+                                <span className="menu-text">Stocks</span>
+                            </a>
+                            <div className="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <Link to="/all-stocks">
+                                            All Stocks
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/add-stock">
+                                            Add Stock
+                                        </Link>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
                         
                         <li>
                             <a href="#">

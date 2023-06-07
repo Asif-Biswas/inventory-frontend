@@ -9,6 +9,9 @@ import AddCategory from './components/category/AddCategory';
 import AllProducts from './components/products/AllProducts';
 import AddProduct from './components/products/AddProduct';
 import EditProduct from './components/products/EditProduct';
+import AllStocks from './components/stock/AllStocks';
+import AddStock from './components/stock/AddStock';
+import EditStock from './components/stock/EditStock';
 
 function App() {
   return (
@@ -34,6 +37,13 @@ function App() {
               <Route path="/all-products" element={<AllProducts/>} />
               <Route path="/add-product" element={<AddProduct/>} />
               <Route path="/edit-product/:id" element={<EditProduct/>} />
+
+              {/* Stock */}
+              <Route path="/all-stocks" element={<AllStocks/>} />
+              <Route path="/add-stock" element={<AddStock/>} />
+              <Route path="/edit-stock/:id" element={<EditStock/>} />
+              
+
 
           </Routes>
             {/* Main container end */}
