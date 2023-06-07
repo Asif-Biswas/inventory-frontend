@@ -12,6 +12,8 @@ import EditProduct from './components/products/EditProduct';
 import AllStocks from './components/stock/AllStocks';
 import AddStock from './components/stock/AddStock';
 import EditStock from './components/stock/EditStock';
+import AllSells from './components/sell/AllSells';
+import AddSell from './components/sell/AddSell';
 
 function App() {
   return (
@@ -42,6 +44,11 @@ function App() {
               <Route path="/all-stocks" element={<AllStocks/>} />
               <Route path="/add-stock" element={<AddStock/>} />
               <Route path="/edit-stock/:id" element={<EditStock/>} />
+
+              {/* Sell */}
+              <Route path="/all-sales" element={<AllSells/>} />
+              <Route path="/add-sell" element={<AddSell/>} />
+
               
 
 

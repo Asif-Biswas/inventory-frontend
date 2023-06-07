@@ -142,11 +142,21 @@ export default function Sidebar() {
                             </div>
                         </li>
                         
-                        <li>
+                        <li className="sidebar-dropdown">
                             <a href="#">
-                                <i className="icon-circular-graph" />
-                                <span className="menu-text">Widgets</span>
+                            <i className="icon-circular-graph" />
+                                <span className="menu-text">Sell</span>
                             </a>
+                            <div className="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <Link to="/all-sales">All sales</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/add-sell">Add Sell</Link>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>
