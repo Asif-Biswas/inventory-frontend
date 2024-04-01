@@ -1,3 +1,4 @@
+import React from 'react'
 import logo from './logo.svg';
 import './App.css';
 import Sidebar from './components/sidebar/Sidebar';
@@ -14,52 +15,59 @@ import AddStock from './components/stock/AddStock';
 import EditStock from './components/stock/EditStock';
 import AllSells from './components/sell/AllSells';
 import AddSell from './components/sell/AddSell';
+import Login from './components/login/Login';
 
 function App() {
-  return (
-    <BrowserRouter>
-        <div className="page-wrapper">
-          {/* Sidebar wrapper start */}
-          <Sidebar />
-          {/* Sidebar wrapper end */}
-          {/* Page content start  */}
-          <div className="page-content">
-            {/* Header start */}
-            <Header/>
-            {/* Header end */}
-            {/* Main container start */}
-            <Routes>
-              <Route path="/" element={<Home/>} />
+  	const [userLoggedIn, setUserLoggedIn] = React.useState(false)
 
-              {/* Category */}
-              <Route path="/all-categories" element={<AllCategories/>} />
-              <Route path="/add-category" element={<AddCategory/>} />
+	React.useEffect(() => {
+		if (localStorage.getItem("inventory-token")) {
+			setUserLoggedIn(true)
+		}
+	}, [])
+	if (!userLoggedIn) return <Login/>
+  	return (
+		<BrowserRouter>
+			<div className="page-wrapper">
+			{/* Sidebar wrapper start */}
+			<Sidebar />
+			{/* Sidebar wrapper end */}
+			{/* Page content start  */}
+			<div className="page-content">
+				{/* Header start */}
+				<Header/>
+				{/* Header end */}
+				{/* Main container start */}
+				<Routes>
+				<Route path="/" element={<Home/>} />
 
-              {/* Products */}
-              <Route path="/all-products" element={<AllProducts/>} />
-              <Route path="/add-product" element={<AddProduct/>} />
-              <Route path="/edit-product/:id" element={<EditProduct/>} />
+				{/* Category */}
+				<Route path="/all-categories" element={<AllCategories/>} />
+				<Route path="/add-category" element={<AddCategory/>} />
 
-              {/* Stock */}
-              <Route path="/all-stocks" element={<AllStocks/>} />
-              <Route path="/add-stock" element={<AddStock/>} />
-              <Route path="/edit-stock/:id" element={<EditStock/>} />
+				{/* Products */}
+				<Route path="/all-products" element={<AllProducts/>} />
+				<Route path="/add-product" element={<AddProduct/>} />
+				<Route path="/edit-product/:id" element={<EditProduct/>} />
 
-              {/* Sell */}
-              <Route path="/all-sales" element={<AllSells/>} />
-              <Route path="/add-sell" element={<AddSell/>} />
+				{/* Stock */}
+				<Route path="/all-stocks" element={<AllStocks/>} />
+				<Route path="/add-stock" element={<AddStock/>} />
+				<Route path="/edit-stock/:id" element={<EditStock/>} />
 
-              
+				{/* Sell */}
+				<Route path="/all-sales" element={<AllSells/>} />
+				<Route path="/add-sell" element={<AddSell/>} />
 
 
-          </Routes>
-            {/* Main container end */}
-            
-          </div>
-          {/* Page content end */}
-        </div>
-    </BrowserRouter>
-  );
+			</Routes>
+				{/* Main container end */}
+				
+			</div>
+			{/* Page content end */}
+			</div>
+		</BrowserRouter>
+	);
 }
 
 export default App;
