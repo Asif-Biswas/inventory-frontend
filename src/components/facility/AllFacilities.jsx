@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react'
 import { Link } from "react-router-dom";
 import { BaseURL } from "../BaseURL";
 
-export default function Allsales() {
+export default function AllFacilities() {
     const [allSell, setAllSell] = React.useState([]);
-    const [allProducts, setAllProducts] = React.useState([]);
 
     React.useEffect(() => {
-        fetch(`${BaseURL}/sales/`, {
+        fetch(`${BaseURL}/facilities/`, {
             headers: {
                 'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
             },
         })
             .then((res) => res.json())
             .then((data) => {
+                console.log(data);
                 setAllSell(data);
             })
             .catch((err) => {
@@ -21,35 +21,19 @@ export default function Allsales() {
             });
     }, []);
 
-    React.useEffect(() => {
-        fetch(`${BaseURL}/products/`, {
-            headers: {
-                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
-            },
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setAllProducts(data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
-    
 
-
-    return (
-        <div className="main-container">
+  return (
+    <div className="main-container">
             {/* Page header start */}
             <div className="page-header">
                 {/* Breadcrumb start */}
                 <ol className="breadcrumb">
-                    <li className="breadcrumb-item">All sales</li>
+                    <li className="breadcrumb-item">All Facilities</li>
                 </ol>
                 {/* Breadcrumb end */}
                 <div className="app-actions">
-                    <Link to="/add-sell" className="btn active">
-                        Add Sell
+                    <Link to="/add-facility" className="btn active">
+                        Add Facility
                     </Link>
                 </div>
             </div>
@@ -58,11 +42,8 @@ export default function Allsales() {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Amount Received</th>
-                            <th>Issued To</th>
-                            <th>Unit Price</th>
+                            <th>Name</th>
+                            <th>Address</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,16 +52,11 @@ export default function Allsales() {
                                 <tr key={sell.id}>
                                     <td>{index + 1}</td>
                                     <td>
-                                        {allProducts.map((product) => {
-                                            if (product.id === sell.item) {
-                                                return product.name;
-                                            }
-                                        })}
+                                        {sell.name}
                                     </td>
-                                    <td>{sell.quantity}</td>
-                                    <td>{sell.amount_received}</td>
-                                    <td>{sell.issued_to}</td>
-                                    <td>{sell.unit_price}</td>
+                                    <td>
+                                        {sell.address}
+                                    </td>
                                 </tr>
                             );
                         })}
@@ -88,5 +64,5 @@ export default function Allsales() {
                 </table>
             </div>
         </div>
-    );
+  )
 }

@@ -18,6 +18,9 @@ export default function Stock({stock, allProducts, index}) {
             if (result.isConfirmed) {
                 fetch(`${BaseURL}/stocks/${stock.id}/`, {
                     method: 'DELETE',
+                    headers: {
+                        'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
+                    },
                 })
                     .then((res) => {
                         if (res.status === 204) {
@@ -54,6 +57,7 @@ export default function Stock({stock, allProducts, index}) {
         <tr>
             <td>{index + 1}</td>
             <td>{allProducts?.find((product) => product.id === stock.product)?.name}</td>
+            <td>{stock.facility_name}</td>
             <td>{stock.cost}</td>
             <td>{stock.quantity}</td>
             <td>{stock.unit_of_measure}</td>

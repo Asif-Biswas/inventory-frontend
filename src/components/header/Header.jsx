@@ -309,7 +309,12 @@ export default function Header() {
                                     <i className="icon-settings1" /> Account
                                     Settings
                                 </a>
-                                <a href="login.html">
+                                <a href="/#" 
+                                    onClick={() => {
+                                        localStorage.removeItem("inventory-token");
+                                        window.location.href = "/";
+                                    }}
+                                >
                                     <i className="icon-log-out1" /> Sign Out
                                 </a>
                             </div>

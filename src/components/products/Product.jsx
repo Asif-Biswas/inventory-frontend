@@ -27,6 +27,9 @@ export default function Product({product, allCategories}) {
             if (result.isConfirmed) {
                 fetch(`${BaseURL}/products/${product.id}/`, {
                     method: 'DELETE',
+                    headers: {
+                        'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
+                    },
                 })
                     .then((res) => {
                         if (res.status === 204) {
@@ -114,6 +117,12 @@ export default function Product({product, allCategories}) {
                             <td>Expiry date</td>
                             <td className='text-right'>
                                 {product.expiry_date? new Date(product.expiry_date).toLocaleDateString() : ''}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Facility</td>
+                            <td className='text-right'>
+                                {product.facility_name}
                             </td>
                         </tr>
                     </tbody>

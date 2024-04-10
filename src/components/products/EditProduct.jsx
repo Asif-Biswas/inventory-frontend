@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 export default function EditProduct() {
     const productId = useParams().id
     const [allCategories, setAllCategories] = React.useState([])
+    const [allFacilities, setAllFacilities] = React.useState([])
     const [product, setProduct] = React.useState({
         name: '',
         brand_name: '',
@@ -20,12 +21,16 @@ export default function EditProduct() {
         batch_no: '',
         product_id: '',
         unique_id: '',
+        facility: '',
     })
 
     React.useEffect(() => {
-        console.log(productId);
         if (productId) {
-            fetch(`${BaseURL}/products/${productId}/`)
+            fetch(`${BaseURL}/products/${productId}/`, {
+                headers: {
+                    'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
+                },
+            })
                 .then((res) => res.json())
                 .then((data) => {
                     setProduct(data)
@@ -37,7 +42,27 @@ export default function EditProduct() {
     }, [productId])
 
     React.useEffect(() => {
-        fetch(`${BaseURL}/categories/`)
+        fetch(`${BaseURL}/facilities/`, {
+            headers: {
+                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setAllFacilities(data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }, [])
+
+
+    React.useEffect(() => {
+        fetch(`${BaseURL}/categories/`, {
+            headers: {
+                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
                 setAllCategories(data)
@@ -67,6 +92,7 @@ export default function EditProduct() {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
             },
             body: JSON.stringify(product),
         })
@@ -182,6 +208,19 @@ export default function EditProduct() {
                         <div className="form-group col-md-6">
                             <label htmlFor="expiry">Expiry Date</label>
                             <input type="date" className="form-control" id="expiry" placeholder="Enter expiry date" onChange={(e) => setProduct({...product, expiry_date: e.target.value})} value={product.expiry_date} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="form-group col-md-6">
+                            <label htmlFor="facility">Facility</label>
+                            <select className="form-control" id="facility" onChange={(e) => setProduct({...product, facility: e.target.value})} value={product.facility}>
+                                <option value={''}>Select Facility</option>
+                                {allFacilities.map((facility) => (
+                                    <option key={facility.id} value={facility.id}>
+                                        {facility.name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                     </div>
                     <div className="form-group">

@@ -137,6 +137,21 @@ export default function Sidebar() {
                                             Add Stock
                                         </Link>
                                     </li>
+                                    <li>
+                                        <Link to="/facility-level-stock">
+                                            Facility Level
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/running-out">
+                                            Running Out
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/stock-out">
+                                            Stock Out
+                                        </Link>
+                                    </li>
                                     
                                 </ul>
                             </div>
@@ -153,8 +168,32 @@ export default function Sidebar() {
                                         <Link to="/all-sales">All sales</Link>
                                     </li>
                                     <li>
+                                        <Link to="/top-sales">Top sales</Link>
+                                    </li>
+                                    <li>
                                         <Link to="/add-sell">Add Sell</Link>
                                     </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li className="sidebar-dropdown">
+                            <a href="#">
+                                <i className="icon-layers2" />
+                                <span className="menu-text">Facility</span>
+                            </a>
+                            <div className="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <Link to="/all-facilities">
+                                            View all facilities
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/add-facility">
+                                            Add facility
+                                        </Link>
+                                    </li>
+                                    
                                 </ul>
                             </div>
                         </li>

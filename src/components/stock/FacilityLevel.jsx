@@ -1,14 +1,17 @@
-import React from "react";
+import React from 'react'
 import { Link } from "react-router-dom";
 import Stock from "./Stock";
 import { BaseURL } from "../BaseURL";
 
-export default function AllStocks() {
+export default function FacilityLevel() {
     const [allStocks, setAllStocks] = React.useState([]);
     const [allProducts, setAllProducts] = React.useState([]);
+    const [facilityId, setFacilityId] = React.useState('');
+    const [allFacilities, setAllFacilities] = React.useState([]);
 
     React.useEffect(() => {
-        fetch(`${BaseURL}/stocks/`, {
+        if (facilityId === '') return;
+        fetch(`${BaseURL}/stocks/?facility=${facilityId}`, {
             headers: {
                 'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
             },
@@ -20,7 +23,23 @@ export default function AllStocks() {
             .catch((err) => {
                 console.log(err);
             });
+    }, [facilityId]);
+
+    React.useEffect(() => {
+        fetch(`${BaseURL}/facilities/`, {
+            headers: {
+                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setAllFacilities(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }, []);
+
 
     React.useEffect(() => {
         fetch(`${BaseURL}/products/`, {
@@ -45,7 +64,7 @@ export default function AllStocks() {
             <div className="page-header">
                 {/* Breadcrumb start */}
                 <ol className="breadcrumb">
-                    <li className="breadcrumb-item">All Stocks</li>
+                    <li className="breadcrumb-item">Stocks at facilities level</li>
                 </ol>
                 {/* Breadcrumb end */}
                 <div className="app-actions">
@@ -55,6 +74,18 @@ export default function AllStocks() {
                 </div>
             </div>
             <div className="row gutters">
+                <div className="col-12 card">
+                    <div className="card-body">
+                        <h6 className="mb-3">Filter by Facility</h6>
+                        <select style={{width: 'auto'}} className="form-control" onChange={(e) => setFacilityId(e.target.value)}>
+                            <option value="">Select Facility</option>
+                            {allFacilities.map((facility) => (
+                                <option value={facility.id}>{facility.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+                {facilityId && 
                 <table id="basicExample" class="table custom-table">
                     <thead>
                         <tr>
@@ -77,6 +108,7 @@ export default function AllStocks() {
                         ))}
                     </tbody>
                 </table>
+                }
             </div>
         </div>
     );

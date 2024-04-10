@@ -9,7 +9,11 @@ export default function AllCategories() {
     const [allCategories, setAllCategories] = React.useState([])
 
     React.useEffect(() => {
-        fetch(`${BaseURL}/categories/`)
+        fetch(`${BaseURL}/categories/`, {
+            headers: {
+                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
                 setAllCategories(data)

@@ -15,7 +15,11 @@ export default function AddSell() {
     })
 
     React.useEffect(() => {
-        fetch(`${BaseURL}/products/`)
+        fetch(`${BaseURL}/products/`, {
+            headers: {
+                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
                 setAllProducts(data)
@@ -38,6 +42,7 @@ export default function AddSell() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
             },
             body: JSON.stringify(sell),
         })

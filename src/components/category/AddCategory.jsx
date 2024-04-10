@@ -7,9 +7,15 @@ export default function AddCategory() {
     const [allCategories, setAllCategories] = React.useState([])
     const [category, setCategory] = React.useState('')
     const [parentCategory, setParentCategory] = React.useState('')
+    const [count, setCount] = React.useState(0)
 
     React.useEffect(() => {
-        fetch(`${BaseURL}/categories/`)
+        const token = localStorage.getItem('inventory-token')
+        fetch(`${BaseURL}/categories/`, {
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
                 setAllCategories(data)
@@ -17,7 +23,7 @@ export default function AddCategory() {
             .catch((err) => {
                 console.log(err)
             })
-    }, [])
+    }, [count])
 
     const addCategory = () => {
         if (category === '') {
@@ -32,6 +38,7 @@ export default function AddCategory() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
             },
             body: JSON.stringify({
                 parent: parentCategory,
@@ -49,6 +56,7 @@ export default function AddCategory() {
                     })
                     setCategory('')
                     setParentCategory('')
+                    setCount(count + 1)
                 }
             })
             .catch((err) => {

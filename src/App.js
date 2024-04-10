@@ -16,15 +16,24 @@ import EditStock from './components/stock/EditStock';
 import AllSells from './components/sell/AllSells';
 import AddSell from './components/sell/AddSell';
 import Login from './components/login/Login';
+import AllFacilities from './components/facility/AllFacilities';
+import AddFacility from './components/facility/AddFacility';
+import FacilityLevel from './components/stock/FacilityLevel';
+import StockOut from './components/stock/StockOut';
+import TopSales from './components/sell/TopSales';
+import RunningOut from './components/stock/RunningOut';
 
 function App() {
   	const [userLoggedIn, setUserLoggedIn] = React.useState(false)
-
+	const [loading, setLoading] = React.useState(true)
+	
 	React.useEffect(() => {
 		if (localStorage.getItem("inventory-token")) {
 			setUserLoggedIn(true)
 		}
+		setLoading(false)
 	}, [])
+	if (loading) return null
 	if (!userLoggedIn) return <Login/>
   	return (
 		<BrowserRouter>
@@ -54,11 +63,18 @@ function App() {
 				<Route path="/all-stocks" element={<AllStocks/>} />
 				<Route path="/add-stock" element={<AddStock/>} />
 				<Route path="/edit-stock/:id" element={<EditStock/>} />
+				<Route path="/facility-level-stock" element={<FacilityLevel/>} />
+				<Route path="/stock-out" element={<StockOut/>} />
+				<Route path="/running-out" element={<RunningOut/>} />
 
 				{/* Sell */}
 				<Route path="/all-sales" element={<AllSells/>} />
 				<Route path="/add-sell" element={<AddSell/>} />
+				<Route path="/top-sales" element={<TopSales/>} />
 
+				{/* Facility */}
+				<Route path="/all-facilities" element={<AllFacilities/>} />
+				<Route path="/add-facility" element={<AddFacility/>} />
 
 			</Routes>
 				{/* Main container end */}

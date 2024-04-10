@@ -33,6 +33,7 @@ export default function Category({name, parent, id, allCategories}) {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
             },
             body: JSON.stringify({
                 parent: parentCategory,
@@ -72,6 +73,9 @@ export default function Category({name, parent, id, allCategories}) {
             if (result.isConfirmed) {
                 fetch(`${BaseURL}/categories/${id}/`, {
                     method: 'DELETE',
+                    headers: {
+                        'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
+                    },
                 })
                     // check if response is 204
                     .then((res) => {

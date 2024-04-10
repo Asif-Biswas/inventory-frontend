@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 export default function EditStock() {
     const stockId = useParams().id
     const [allProducts, setAllProducts] = React.useState([])
+    const [allFacilities, setAllFacilities] = React.useState([])
     
     const [stock, setStock] = React.useState({
         cost: '',
@@ -16,10 +17,15 @@ export default function EditStock() {
         received_quantity: '',
         product: '',
         timestamp: new Date().toISOString(),
+        facility: '',
     })
 
     React.useEffect(() => {
-        fetch(`${BaseURL}/products/`)
+        fetch(`${BaseURL}/products/`, {
+            headers: {
+                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
                 setAllProducts(data)
@@ -30,7 +36,27 @@ export default function EditStock() {
     }, [])
 
     React.useEffect(() => {
-        fetch(`${BaseURL}/stocks/${stockId}/`)
+        fetch(`${BaseURL}/facilities/`, {
+            headers: {
+                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setAllFacilities(data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }, [])
+
+
+    React.useEffect(() => {
+        fetch(`${BaseURL}/stocks/${stockId}/`, {
+            headers: {
+                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
                 setStock(data)
@@ -56,6 +82,7 @@ export default function EditStock() {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),    
             },
             body: JSON.stringify(stock),
         })
@@ -145,6 +172,17 @@ export default function EditStock() {
                         <div className="form-group col-md-6">
                             <label htmlFor="batch">Timestamp</label>
                             <input type="datetime-local" className="form-control" id="batch" placeholder="Enter timestamp" onChange={(e) => setStock({ ...stock, timestamp: e.target.value })} value={new Date(stock.timestamp).toISOString().slice(0, 16)} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="form-group col-md-6">
+                            <label htmlFor="facility">Facility</label>
+                            <select className="form-control" id="facility" onChange={(e) => setStock({ ...stock, facility: e.target.value })} value={stock.facility}>
+                                <option value={""}>Select facility</option>
+                                {allFacilities.map((facility) => (
+                                    <option value={facility.id}>{facility.name}</option>
+                                ))}
+                            </select>
                         </div>
                     </div>
                     <div className="form-group">

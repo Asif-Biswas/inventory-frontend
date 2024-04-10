@@ -9,9 +9,14 @@ export default function AllProducts() {
     const [allCategories, setAllCategories] = React.useState([])
 
     React.useEffect(() => {
-        fetch(`${BaseURL}/products/`)
+        fetch(`${BaseURL}/products/`, {
+            headers: {
+                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
+                console.log(data)
                 setAllProducts(data)
             })
             .catch((err) => {
@@ -20,7 +25,11 @@ export default function AllProducts() {
     }, [])
 
     React.useEffect(() => {
-        fetch(`${BaseURL}/categories/`)
+        fetch(`${BaseURL}/categories/`, {
+            headers: {
+                'Authorization': 'Token ' + localStorage.getItem('inventory-token'),
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
                 setAllCategories(data)
