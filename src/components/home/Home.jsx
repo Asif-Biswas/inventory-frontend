@@ -38,7 +38,7 @@ export default function Home({dashboardInfo}) {
             {/* Row start */}
             <div className="row gutters">
                 <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <Link to="/categories" className="info-stats2">
+                    <Link to="/all-products" className="info-stats2">
                         <div className="info-icon info">
                             <i className="icon-eye1" />
                         </div>
@@ -51,7 +51,7 @@ export default function Home({dashboardInfo}) {
                     </Link>
                 </div>
                 <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div className="info-stats2">
+                    <Link to={"/all-stocks"} className="info-stats2">
                         <div className="info-icon danger">
                             <i className="icon-shopping-cart1" />
                         </div>
@@ -59,10 +59,10 @@ export default function Home({dashboardInfo}) {
                             <h3>{dashboardInfo?.total_stock}</h3>
                             <p>Stock</p>
                         </div>
-                    </div>
+                    </Link>
                 </div>
                 <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div className="info-stats2">
+                    <Link to={"/all-sales"} className="info-stats2">
                         <div className="info-icon warning">
                             <i className="icon-shopping-bag1" />
                         </div>
@@ -70,10 +70,10 @@ export default function Home({dashboardInfo}) {
                             <h3>{dashboardInfo?.total_sales}</h3>
                             <p>Sales</p>
                         </div>
-                    </div>
+                    </Link>
                 </div>
                 <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div className="info-stats2">
+                    <Link to={"/stock-out"} className="info-stats2">
                         <div className="info-icon success">
                             <i className="icon-activity" />
                         </div>
@@ -81,7 +81,7 @@ export default function Home({dashboardInfo}) {
                             <h3>{dashboardInfo?.stock_out}</h3>
                             <p>Stock out</p>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
             {/* Row end */}
