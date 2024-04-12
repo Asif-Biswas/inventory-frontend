@@ -200,7 +200,7 @@ export default function Header({dashboardInfo}) {
                             aria-haspopup="true"
                         >
                             <img
-                                src="img/user2.png"
+                                src="img/user.jpg"
                                 className="user-avatar"
                                 alt="Avatar"
                             />
@@ -213,7 +213,7 @@ export default function Header({dashboardInfo}) {
                                 <div className="header-user-profile">
                                     <div className="header-user">
                                         <img
-                                            src="img/user2.png"
+                                            src="img/user.jpg"
                                             alt="Admin Template"
                                         />
                                     </div>

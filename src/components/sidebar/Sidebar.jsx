@@ -6,8 +6,8 @@ export default function Sidebar({dashboardInfo}) {
         <nav id="sidebar" className="sidebar-wrapper">
             {/* Sidebar brand start  */}
             <div className="sidebar-brand">
-                <a href="index.html" className="logo">
-                    Tycöòn
+                <a href="/" className="logo">
+                    Cloud Script
                 </a>
             </div>
             {/* Sidebar brand end  */}
