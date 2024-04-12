@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Header() {
+export default function Header({dashboardInfo}) {
     return (
         <header className="header">
             <div className="toggle-btns">
@@ -107,89 +107,7 @@ export default function Header() {
                             </ul>
                         </div>
                     </li>
-                    <li className="dropdown d-none d-sm-block">
-                        <a
-                            href="#"
-                            id="notifications"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                        >
-                            <i className="icon-star2" />
-                            <span className="count-label blue" />
-                        </a>
-                        <div
-                            className="dropdown-menu dropdown-menu-right lrg"
-                            aria-labelledby="notifications"
-                        >
-                            <div className="dropdown-menu-header">
-                                Bookmarks (21)
-                            </div>
-                            <div className="customScroll5">
-                                <ul className="bookmarks p-3">
-                                    <li>
-                                        <a href="#">Bootstrap admin template</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Images resources</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            Best admin templates 2020
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Javascript libraries</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Angular widgets</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">UX library</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Bootstrap admin template</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Images resources</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            Best admin templates 2020
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Javascript libraries</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Angular widgets</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">UX library</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Bootstrap admin template</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Images resources</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            Best admin templates 2020
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Javascript libraries</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Angular widgets</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">UX library</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
+                    
                     <li className="dropdown d-none d-sm-block">
                         <a
                             href="#"
@@ -299,13 +217,13 @@ export default function Header() {
                                             alt="Admin Template"
                                         />
                                     </div>
-                                    <h5>Yuki Hayashi</h5>
-                                    <p>Super User</p>
+                                    <h5>{dashboardInfo?.user?.name}</h5>
+                                    <p>{dashboardInfo?.organisation?.name}</p>
                                 </div>
-                                <a href="user-profile.html">
+                                <a href="#">
                                     <i className="icon-user1" /> My Profile
                                 </a>
-                                <a href="account-settings.html">
+                                <a href="#">
                                     <i className="icon-settings1" /> Account
                                     Settings
                                 </a>

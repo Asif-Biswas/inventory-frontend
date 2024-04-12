@@ -22,10 +22,30 @@ import FacilityLevel from './components/stock/FacilityLevel';
 import StockOut from './components/stock/StockOut';
 import TopSales from './components/sell/TopSales';
 import RunningOut from './components/stock/RunningOut';
+import { BaseURL } from './components/BaseURL';
 
 function App() {
   	const [userLoggedIn, setUserLoggedIn] = React.useState(false)
 	const [loading, setLoading] = React.useState(true)
+	const [dashboardInfo, setDashboardInfo] = React.useState({});
+
+    React.useEffect(() => {
+        const token = localStorage.getItem('inventory-token')
+		if (!token) return
+        fetch(`${BaseURL}/dashboard-info/`, {
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+				console.log(data);
+                setDashboardInfo(data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }, [])
 	
 	React.useEffect(() => {
 		if (localStorage.getItem("inventory-token")) {
@@ -39,16 +59,16 @@ function App() {
 		<BrowserRouter>
 			<div className="page-wrapper">
 			{/* Sidebar wrapper start */}
-			<Sidebar />
+			<Sidebar dashboardInfo={dashboardInfo}/>
 			{/* Sidebar wrapper end */}
 			{/* Page content start  */}
 			<div className="page-content">
 				{/* Header start */}
-				<Header/>
+				<Header dashboardInfo={dashboardInfo}/>
 				{/* Header end */}
 				{/* Main container start */}
 				<Routes>
-				<Route path="/" element={<Home/>} />
+				<Route path="/" element={<Home dashboardInfo={dashboardInfo} />} />
 
 				{/* Category */}
 				<Route path="/all-categories" element={<AllCategories/>} />

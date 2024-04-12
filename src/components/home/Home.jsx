@@ -1,6 +1,10 @@
 import React from "react";
+import { Link } from 'react-router-dom'
+import { BaseURL } from '../BaseURL'
+import Swal from 'sweetalert2'
 
-export default function Home() {
+export default function Home({dashboardInfo}) {
+
     return (
         <div className="main-container">
             {/* Page header start */}
@@ -34,15 +38,17 @@ export default function Home() {
             {/* Row start */}
             <div className="row gutters">
                 <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div className="info-stats2">
+                    <Link to="/categories" className="info-stats2">
                         <div className="info-icon info">
                             <i className="icon-eye1" />
                         </div>
                         <div className="sale-num">
-                            <h3>32,589</h3>
-                            <p>Visitors</p>
+                            <h3>
+                                {dashboardInfo?.total_products}
+                            </h3>
+                            <p>Products</p>
                         </div>
-                    </div>
+                    </Link>
                 </div>
                 <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div className="info-stats2">
@@ -50,8 +56,8 @@ export default function Home() {
                             <i className="icon-shopping-cart1" />
                         </div>
                         <div className="sale-num">
-                            <h3>27,837</h3>
-                            <p>Orders</p>
+                            <h3>{dashboardInfo?.total_stock}</h3>
+                            <p>Stock</p>
                         </div>
                     </div>
                 </div>
@@ -61,7 +67,7 @@ export default function Home() {
                             <i className="icon-shopping-bag1" />
                         </div>
                         <div className="sale-num">
-                            <h3>43,456</h3>
+                            <h3>{dashboardInfo?.total_sales}</h3>
                             <p>Sales</p>
                         </div>
                     </div>
@@ -72,8 +78,8 @@ export default function Home() {
                             <i className="icon-activity" />
                         </div>
                         <div className="sale-num">
-                            <h3>29,425</h3>
-                            <p>Expenses</p>
+                            <h3>{dashboardInfo?.stock_out}</h3>
+                            <p>Stock out</p>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Sidebar({dashboardInfo}) {
     return (
         <nav id="sidebar" className="sidebar-wrapper">
             {/* Sidebar brand start  */}
@@ -15,13 +15,16 @@ export default function Sidebar() {
             <div className="sidebar-user-details">
                 <div className="user-profile">
                     <img
-                        src="img/user2.png"
+                        src="img/user.jpg"
                         className="profile-thumb"
                         alt="User Thumb"
                     />
                     <span className="status-label" />
                 </div>
-                <h6 className="profile-name">Yuki Hayashi</h6>
+                <h6 className="profile-name">
+                    {dashboardInfo?.user?.name}
+                    <p className="text-muted">{dashboardInfo?.organisation?.name}</p>
+                </h6>
                 <div className="profile-actions">
                     <a
                         href="account-settings.html"
